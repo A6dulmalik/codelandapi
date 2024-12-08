@@ -14,19 +14,24 @@ import {
 } from '@nestjs/common';
 import { CreateUserDto } from 'src/dto/create-user.dto';
 import { UpdateUserDto } from 'src/dto/updateUser.dto';
+// import { GetUserParamDto } from 'src/dto/userParam.dto';
+import { UserService } from './services/user.services';
 import { GetUserParamDto } from 'src/dto/userParam.dto';
 
 @Controller('users')
 export class UsersController {
-    @Get('/:id?')
+    constructor(private readonly userService: UserService) { }
+
+    @Get("/:id?")
     public getUsers(
-        @Param(ParseIntPipe) getuserparamdto: GetUserParamDto | undefined,
+        @Param() getuserparamdto: GetUserParamDto,
         @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
         @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
-    ): string {
-        console.log(typeof getuserparamdto, getuserparamdto); // Logging id and its type
+    ) {
+        // console.log(typeof getuserparamdto, getuserparamdto); // Logging id and its type
         console.log(typeof limit, typeof page, limit, page); // Logging limit and page
-        return 'Getting your request';
+        console.log(this.userService.findOneById(getuserparamdto));
+        return (this.userService.findAllUsers());
     }
 
     @Post()

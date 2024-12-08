@@ -24,7 +24,7 @@ export class CreateUserDto {
     @IsNotEmpty()
     @MinLength(3)
     @MaxLength(8)
-    @Matches((/^(?=.[!@#$%^&])(?=.[a-zA-Z])(?=.\d)[a-zA-Z\d!@#$%^&*]{8,16}$/), {
+    @Matches(/^(?=.*[!@#$%^&*])(?=.*[a-zA-Z\d])[a-zA-Z\d!@#$%^&*]{6,}$/, {
         message: "Invalid Password"
     })
     password: string;
