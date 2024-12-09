@@ -31,9 +31,9 @@ export class UserService {
         return this.users;
     };
 
-    public findOneById(getuserparamdto?: GetUserParamDto) {
+    public findOneById(getuserparamdto: GetUserParamDto) {
         console.log(getuserparamdto)
-        return this.users[1]
+        return this.users[0]
         // console.log(this.users)
         // console.log(id)
     }

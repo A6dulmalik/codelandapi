@@ -17,12 +17,32 @@ import { UpdateUserDto } from 'src/dto/updateUser.dto';
 // import { GetUserParamDto } from 'src/dto/userParam.dto';
 import { UserService } from './services/user.services';
 import { GetUserParamDto } from 'src/dto/userParam.dto';
+import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @Controller('users')
+@ApiTags('users')
 export class UsersController {
     constructor(private readonly userService: UserService) { }
 
+    @ApiResponse({
+        status: 200,
+        description: 'Users fetched successfully based on the query'
+    })
+    @ApiOperation({
+        summary: 'Fetches from the users'
+    })
     @Get("/:id?")
+    @ApiQuery({
+        name: 'limit',
+        type: 'number',
+        required: false
+    })
+    @ApiQuery({
+        name: 'page',
+        type: 'number',
+        required: false,
+        description: 'page number'
+    })
     public getUsers(
         @Param() getuserparamdto: GetUserParamDto,
         @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
@@ -30,8 +50,9 @@ export class UsersController {
     ) {
         // console.log(typeof getuserparamdto, getuserparamdto); // Logging id and its type
         console.log(typeof limit, typeof page, limit, page); // Logging limit and page
-        console.log(this.userService.findOneById(getuserparamdto));
-        return (this.userService.findAllUsers());
+        console.log(this.userService.findAllUsers());
+        // return (this.userService.findAllUsers());
+        return this.userService.findOneById(getuserparamdto);
     }
 
     @Post()
