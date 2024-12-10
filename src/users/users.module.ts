@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
 import { UsersController } from './users.controller';
-import { UserService } from './services/user.services';
+import { UserService } from './providers/user.services';
 
 @Module({
   controllers: [UsersController],

@@ -15,7 +15,7 @@ import {
 import { CreateUserDto } from 'src/dto/create-user.dto';
 import { UpdateUserDto } from 'src/dto/updateUser.dto';
 // import { GetUserParamDto } from 'src/dto/userParam.dto';
-import { UserService } from './services/user.services';
+import { UserService } from './providers/user.services';
 import { GetUserParamDto } from 'src/dto/userParam.dto';
 import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 

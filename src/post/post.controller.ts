@@ -32,8 +32,9 @@ export class PostController {
 
     @Post()
     public createPost (
-
         @Body() createpostdto: CreatePostDto
-
-    )
+    ) {
+        console.log(createpostdto)
+        return createpostdto
+    }
  }
