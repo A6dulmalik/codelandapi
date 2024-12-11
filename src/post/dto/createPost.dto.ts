@@ -1,5 +1,5 @@
 import { PostStatus } from "src/post/enums/postStatus.enum";
-import { CreateUserDto } from "./create-user.dto";
+import { CreateUserDto } from "../../users/dto/create-user.dto";
 import { IsArray, IsDate, IsEnum,  IsISO8601,  isISO8601,  IsNotEmpty,  IsObject, IsOptional, IsString, MinLength } from "class-validator";
 import { PostType } from "src/post/enums/postType.enum";
 import { ApiProperty } from "@nestjs/swagger";

@@ -12,11 +12,11 @@ import {
     Post,
     Query,
 } from '@nestjs/common';
-import { CreateUserDto } from 'src/dto/create-user.dto';
-import { UpdateUserDto } from 'src/dto/updateUser.dto';
+import { CreateUserDto } from 'src/users/dto/create-user.dto';
+import { UpdateUserDto } from 'src/users/dto/updateUser.dto';
 // import { GetUserParamDto } from 'src/dto/userParam.dto';
 import { UserService } from './providers/user.services';
-import { GetUserParamDto } from 'src/dto/userParam.dto';
+import { GetUserParamDto } from 'src/users/dto/userParam.dto';
 import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @Controller('users')

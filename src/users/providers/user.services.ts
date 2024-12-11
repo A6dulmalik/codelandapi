@@ -1,6 +1,9 @@
 /* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
-import { GetUserParamDto } from 'src/dto/userParam.dto';
+import { GetUserParamDto } from 'src/users/dto/userParam.dto';
+import { User } from '../entity/user.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 // @Injectable()
 // export class UserService {
@@ -11,30 +14,35 @@ import { GetUserParamDto } from 'src/dto/userParam.dto';
 // }
 @Injectable()
 export class UserService {
-    public users = [
-        {
-            "name": "James Bond",
-            "username": '007',
-            "occupation": 'Agent',
-        },
-        {
-            "name": "Sherlock Holmes",
-            "username": "Mr Holmes",
-            "occupation": "Private Detective",
-        }
-    ];
+    constructor (
+        @InjectRepository(User)
+        private userRepository: Repository<User>
+    ) {}
+    // public users = [
+    //     {
+    //         "name": "James Bond",
+    //         "username": '007',
+    //         "occupation": 'Agent',
+    //     },
+    //     {
+    //         "name": "Sherlock Holmes",
+    //         "username": "Mr Holmes",
+    //         "occupation": "Private Detective",
+    //     }
+    // ];
+
     public findAllUsers(
         limit?: number,
         page?: number,
-    ) {
+    ): Promise<User[]> {
         console.log(limit, page)
-        return this.users;
+        // console.log(this.users);
+        return this.userRepository.find()
     };
 
     public findOneById(getuserparamdto: GetUserParamDto) {
         console.log(getuserparamdto)
-        return this.users[0]
-        // console.log(this.users)
-        // console.log(id)
+        // console.log( this.users[0])
+        return this.userRepository.findOneBy(getuserparamdto)
     }
 }
