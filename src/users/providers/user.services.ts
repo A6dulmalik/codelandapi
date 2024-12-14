@@ -4,14 +4,10 @@ import { GetUserParamDto } from 'src/users/dto/userParam.dto';
 import { User } from '../entity/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { CreateUserDto } from '../dto/create-user.dto';
+import { create } from 'domain';
 
-// @Injectable()
-// export class UserService {
-//   public users = [];
-//   public findAllUsers(): object[] {
-//     return this.users;
-//   }
-// }
+
 @Injectable()
 export class UserService {
     constructor (
@@ -31,18 +27,31 @@ export class UserService {
     //     }
     // ];
 
-    public findAllUsers(
-        limit?: number,
-        page?: number,
-    ): Promise<User[]> {
-        console.log(limit, page)
-        // console.log(this.users);
-        return this.userRepository.find()
-    };
+    // public findAllUsers(
+    //     limit?: number,
+    //     page?: number,
+    // ): Promise<User[]> {
+    //     console.log(limit, page)
+    //     // console.log(this.users);
+    //     return this.userRepository.find()
+    // };
 
-    public findOneById(getuserparamdto: GetUserParamDto) {
-        console.log(getuserparamdto)
-        // console.log( this.users[0])
-        return this.userRepository.findOneBy(getuserparamdto)
+    // public findOneById(getuserparamdto: GetUserParamDto) {
+    //     console.log(getuserparamdto)
+    //     // console.log( this.users[0])
+    //     return this.userRepository.findOneBy(getuserparamdto)
+    // }
+
+    public async createUser(createuserdto: CreateUserDto) {
+        // Check if user already exists
+        const existingUser = await this.userRepository.findOne({
+            where: {email: createuserdto.email}
+        })
+
+        // Handle Error
+        // Create user
+        let newUser = this.userRepository.create(createuserdto)
+        return newUser = await this.userRepository.save(newUser)
+        
     }
 }

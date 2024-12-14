@@ -6,14 +6,17 @@ export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column("varchar", {length: 100, nullable: false})
   firstName: string;
 
-  @Column()
+  @Column("varchar", {length: 100, nullable: false})
   lastName: string;
 
-  @Column()
+  @Column("varchar", {unique: true, nullable: false})
   email: string
+
+  @Column("varchar", {nullable: false})
+  password: string
 
   @Column({ default: false })
   isActive: boolean;

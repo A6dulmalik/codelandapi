@@ -26,7 +26,7 @@ export class CreatePostDto {
 
     @ApiProperty({
         enum: PostStatus,
-        description: 'Values are '
+        description: 'Values are drafts, scheduled, reviewed, published'
     })
     @IsEnum(PostStatus)
     postStatus: PostStatus;
@@ -43,6 +43,8 @@ export class CreatePostDto {
     @IsOptional()
     @IsISO8601()
     publishedDate: Date;
+
+    
 
     @IsArray()
     @IsString({each: true})

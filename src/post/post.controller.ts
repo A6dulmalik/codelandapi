@@ -9,10 +9,10 @@ import {
     Post,
     Query,
 } from '@nestjs/common';
-import { GetPostParamDto } from 'src/post/dto/postParam.dto';
 import { PostService } from './provider/post.service';
 import { ApiTags } from '@nestjs/swagger';
-import { CreatePostDto } from 'src/post/dto/createPost.dto';
+import { GetPostParamDto } from './dto/postParam.dto';
+import { CreatePostDto } from './dto/createPost.dto';
 
 
 @Controller('posts')

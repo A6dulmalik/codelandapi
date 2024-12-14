@@ -1,10 +1,10 @@
 POST http://localhost:3002/users
 Content-Type:application/json
 {
-    "firstName": "Ayam",
-    "lastName": "Hangry",
-    "email": "example@yahoo.com",
-    "password": "p@ssword"
+    "firstName": "Sheldon Lee",
+    "lastName": "Cooper",
+    "email": "shelly@gmail.com",
+    "password": "pa$$word"
 }
 
 POST http://localhost:3002/posts
@@ -15,4 +15,11 @@ Content-Type:application/json
     "postStatus":"scheduled",
     "content":"The origins of vampires, the firs family",
     "tags":["thriller","crime","romance"]
+}
+
+
+POST http://localhost:3002/meta-options
+Content-Type:application/json
+{
+    "metaValue": "{\"sider\": true, \"verfied\": false}" 
 }

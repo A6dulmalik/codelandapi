@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { GetPostParamDto } from 'src/post/dto/postParam.dto';
+import { GetPostParamDto } from '../dto/postParam.dto';
 
 @Injectable()
 export class PostService {

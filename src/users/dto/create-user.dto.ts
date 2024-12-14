@@ -14,7 +14,6 @@ export class CreateUserDto {
     firstName: string;
 
     @IsString()
-    @IsOptional()
     lastName: string;
 
     @IsEmail()

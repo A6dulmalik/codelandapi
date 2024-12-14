@@ -24,6 +24,7 @@ import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 export class UsersController {
     constructor(private readonly userService: UserService) { }
 
+    // GET  Request all/byId
     @ApiResponse({
         status: 200,
         description: 'Users fetched successfully based on the query'
@@ -48,26 +49,34 @@ export class UsersController {
         @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
         @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
     ) {
-        // console.log(typeof getuserparamdto, getuserparamdto); // Logging id and its type
-        console.log(typeof limit, typeof page, limit, page); // Logging limit and page
-        console.log(this.userService.findAllUsers());
-        // return (this.userService.findAllUsers());
-        return this.userService.findOneById(getuserparamdto);
+        
     }
 
+    @ApiResponse({
+        status: 200,
+        description: 'User created successfully.'
+    })
+    @ApiOperation({
+        summary: 'creates a new user'
+    })
     @Post()
     public createUsers(
         @Body() createuserdto: CreateUserDto,
         // @Ip() ip: string,
         // @Headers() header: any) 
     ) {
-        console.log(typeof createuserdto, createuserdto,);
-        console.log(createuserdto instanceof CreateUserDto)
-        // console.log(header);
-        return 'Posting your request';
+        return this.userService.createUser(createuserdto);
 
     }
 
+
+    @ApiResponse({
+        status: 200, 
+        description: 'User edited successfully'
+    })
+    @ApiOperation({
+        summary: 'Edits an existing user'
+    })
     @Patch()
     public UpdateUser(
         @Body() updateuserdto: UpdateUserDto
