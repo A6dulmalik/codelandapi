@@ -1,14 +1,17 @@
 /* eslint-disable prettier/prettier */
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { UsersController } from './users.controller';
 import { UserService } from './providers/user.services';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entity/user.entity';
+import { AuthModule } from 'src/auth/auth.module';
+import { CreateUserProvider } from './providers/create-user.provider';
+import { FindOneByEmail } from './providers/find-one-by-email';
 
 @Module({
-  imports:[TypeOrmModule.forFeature([User])],
+  imports:[TypeOrmModule.forFeature([User]), forwardRef(()=> AuthModule)],
   controllers: [UsersController],
-  providers: [UserService],
-  exports: [UserService, TypeOrmModule]
+  providers: [UserService, CreateUserProvider, FindOneByEmail],
+  exports: [ TypeOrmModule, UserService],
 })
 export class UsersModule {}

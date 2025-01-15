@@ -1,31 +1,34 @@
 /* eslint-disable prettier/prettier */
-import { Injectable } from '@nestjs/common';
-import { GetUserParamDto } from 'src/users/dto/userParam.dto';
+import { 
+    BadRequestException, 
+    forwardRef, 
+    Inject, 
+    Injectable, 
+    RequestTimeoutException 
+} from '@nestjs/common';
+// import { GetUserParamDto } from 'src/users/dto/userParam.dto';
 import { User } from '../entity/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from '../dto/create-user.dto';
-import { create } from 'domain';
+import { AuthService } from 'src/auth/auth.service';
+import { CreateUserProvider } from './create-user.provider';
+import { FindOneByEmail } from './find-one-by-email';
 
 
 @Injectable()
 export class UserService {
     constructor (
         @InjectRepository(User)
-        private userRepository: Repository<User>
+        private userRepository: Repository<User>,
+
+        @Inject(forwardRef(() => AuthService))
+        private readonly authService: AuthService,
+
+        private readonly createUserProvider: CreateUserProvider,
+
+        private readonly findOneByEmail: FindOneByEmail
     ) {}
-    // public users = [
-    //     {
-    //         "name": "James Bond",
-    //         "username": '007',
-    //         "occupation": 'Agent',
-    //     },
-    //     {
-    //         "name": "Sherlock Holmes",
-    //         "username": "Mr Holmes",
-    //         "occupation": "Private Detective",
-    //     }
-    // ];
 
     // public findAllUsers(
     //     limit?: number,
@@ -36,22 +39,17 @@ export class UserService {
     //     return this.userRepository.find()
     // };
 
-    // public findOneById(getuserparamdto: GetUserParamDto) {
-    //     console.log(getuserparamdto)
-    //     // console.log( this.users[0])
-    //     return this.userRepository.findOneBy(getuserparamdto)
-    // }
-
-    public async createUser(createuserdto: CreateUserDto) {
-        // Check if user already exists
-        const existingUser = await this.userRepository.findOne({
-            where: {email: createuserdto.email}
-        })
-
-        // Handle Error
-        // Create user
-        let newUser = this.userRepository.create(createuserdto)
-        return newUser = await this.userRepository.save(newUser)
-        
+    public async findOneById(id: number) {
+        return this.userRepository.findOneBy({id})
     }
+
+    public async findByEmail(email: string) {
+        return await this.findOneByEmail.findOneByEmail(email)
+    }
+
+    public async createUser(createuserdto: CreateUserDto) {        
+        return this.createUserProvider.createUser(createuserdto)
+    }
+
+    public async deleteUser () {}
 }

@@ -12,32 +12,40 @@ import { User } from './users/entity/user.entity';
 import { Post } from './post/post.entity';
 import { TagModule } from './tag/tag.module';
 import { MetaOptionsModule } from './meta-options/meta-options.module';
+import { AuthModule } from './auth/auth.module';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { stringify } from 'querystring';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+       envFilePath: ['.env.development']
+      }),
     UsersModule, 
     PostModule, 
     TypeOrmModule.forRootAsync({
-      useFactory: ()=>({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService)=>({
         type: 'postgres',
-        host: 'localhost',
-        port: 5432,
-        username: 'postgres',
-        password: '1234',
-        database: 'codeland',
-        // entities: [User, Post], 
-        
-        synchronize: true,
-        autoLoadEntities: true,
-        import: [],
-        inject: [],
-      })
-    }), TagModule, MetaOptionsModule,
+        host: configService.get('DATABASE_HOST'),
+        port: +configService.get('DATABASE_PORT'),
+        username: configService.get('DATABASE_USER'),
+        password: configService.get('DATABASE_PASSWORD'),
+        database: configService.get('DATABASE_USER'),
+        synchronize: configService.get('DATABASE_SYNC'),
+        autoLoadEntities: configService.get('DATABASE_LOAD'),
+      }),
+    })
+    , TagModule, MetaOptionsModule, AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-// eslint-disable-next-line prettier/prettier
+
 export class AppModule { 
   constructor (private dataSource: DataSource) {}
+  
+
 }

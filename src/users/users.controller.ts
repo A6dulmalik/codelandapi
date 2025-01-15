@@ -14,10 +14,9 @@ import {
 } from '@nestjs/common';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { UpdateUserDto } from 'src/users/dto/updateUser.dto';
-// import { GetUserParamDto } from 'src/dto/userParam.dto';
 import { UserService } from './providers/user.services';
-import { GetUserParamDto } from 'src/users/dto/userParam.dto';
 import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { GetUserParamDto } from './dto/userParam.dto';
 
 @Controller('users')
 @ApiTags('users')
@@ -34,11 +33,6 @@ export class UsersController {
     })
     @Get("/:id?")
     @ApiQuery({
-        name: 'limit',
-        type: 'number',
-        required: false
-    })
-    @ApiQuery({
         name: 'page',
         type: 'number',
         required: false,
@@ -49,7 +43,7 @@ export class UsersController {
         @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
         @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
     ) {
-        
+        console.log(limit, page)
     }
 
     @ApiResponse({
@@ -66,7 +60,6 @@ export class UsersController {
         // @Headers() header: any) 
     ) {
         return this.userService.createUser(createuserdto);
-
     }
 
 
