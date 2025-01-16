@@ -10,8 +10,17 @@ POST http://localhost:3002/users
 Content-Type:application/json
 {
     "firstName": "Rajesh",
-    "lastname": "Koothrapali",
+    "lastName": "Koothrapali",
     "email": "rramayenkoothrapali@yahoo.com",
+    "password": "pa$$word"
+}
+
+POST http://localhost:3002/users
+Content-Type:application/json
+{
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "jdoee@yahoo.com",
     "password": "pa$$word"
 }
 

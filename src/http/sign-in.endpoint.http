@@ -1,0 +1,7 @@
+POST http://localhost:3002/auth/signin
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE2LCJlbWFpbCI6InJyYW1heWVua29vdGhyYXBhbGlAeWFob28uY29tIiwiaWF0IjoxNzM3MDMxMDg2LCJleHAiOjE3MzcwMzQ2ODYsImF1ZCI6ImxvY2FsaG9zdDogMzAwMiIsImlzcyI6ImxvY2FsaG9zdDogMzAwMiJ9.dsLlRdiwMtv0J1127rtweQni8_9rDYOsOgUr7MLkkm8
+Content-Type: application/json
+{
+    "email": "rramayenkoothrapali@yahoo.com",
+    "password": "pa$$word"
+}

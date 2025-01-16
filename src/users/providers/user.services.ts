@@ -30,14 +30,14 @@ export class UserService {
         private readonly findOneByEmail: FindOneByEmail
     ) {}
 
-    // public findAllUsers(
-    //     limit?: number,
-    //     page?: number,
-    // ): Promise<User[]> {
-    //     console.log(limit, page)
-    //     // console.log(this.users);
-    //     return this.userRepository.find()
-    // };
+    public findAllUsers(
+        limit?: number,
+        page?: number,
+    ): Promise<User[]> {
+        console.log(limit, page)
+        // console.log(this.users);
+        return this.userRepository.find()
+    };
 
     public async findOneById(id: number) {
         return this.userRepository.findOneBy({id})

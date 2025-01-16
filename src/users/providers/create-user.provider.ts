@@ -41,10 +41,12 @@ export class CreateUserProvider {
             password: await this.hashingProvider.hashPassword(createuserdto.password)
         })
        try {
-        newUser =  await this.userRepository.save(newUser)
+        newUser =  await this.userRepository.save(newUser);
        } catch (error) {
         return error
        }
+
+       return newUser;
         
     }
 

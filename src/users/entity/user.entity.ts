@@ -14,7 +14,7 @@ export class User {
   firstName: string;
 
   @Column("varchar", {length: 100, nullable: false})
-  lastname: string;
+  lastName: string;
 
   @Column("varchar", {unique: true, nullable: false})
   email: string
@@ -23,7 +23,6 @@ export class User {
   password: string
 
   
-
-  @Column({ default: false })
-  isActive: boolean;
+  // @Column({ default: false })
+  // isActive: boolean;
 }

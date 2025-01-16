@@ -14,15 +14,13 @@ export class CreateUserDto {
     firstName: string;
 
     @IsString()
-    lastname: string;
+    lastName: string;
 
     @IsEmail()
     email: string;
 
     @IsString()
     @IsNotEmpty()
-    @MinLength(3)
-    @MaxLength(8)
     @Matches(/^(?=.*[!@#$%^&*])(?=.*[a-zA-Z\d])[a-zA-Z\d!@#$%^&*]{6,}$/, {
         message: "Invalid Password"
     })

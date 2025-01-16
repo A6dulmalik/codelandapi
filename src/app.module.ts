@@ -30,10 +30,10 @@ import { stringify } from 'querystring';
       useFactory: (configService: ConfigService)=>({
         type: 'postgres',
         host: configService.get('DATABASE_HOST'),
-        port: +configService.get('DATABASE_PORT'),
+        port: configService.get('DATABASE_PORT'),
         username: configService.get('DATABASE_USER'),
         password: configService.get('DATABASE_PASSWORD'),
-        database: configService.get('DATABASE_USER'),
+        database: configService.get('DATABASE_NAME'),
         synchronize: configService.get('DATABASE_SYNC'),
         autoLoadEntities: configService.get('DATABASE_LOAD'),
       }),
