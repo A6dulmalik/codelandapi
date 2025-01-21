@@ -14,7 +14,6 @@ import { TagModule } from './tag/tag.module';
 import { MetaOptionsModule } from './meta-options/meta-options.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { stringify } from 'querystring';
 
 @Module({
   imports: [

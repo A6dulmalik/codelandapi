@@ -18,7 +18,6 @@ export class FindOneByEmail {
         } catch (error) {
             throw new RequestTimeoutException(error, {
                 description: 'Error fetching user',
-                cause: 'the user is not found'
             })
         }
 

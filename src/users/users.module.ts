@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { forwardRef, Module } from '@nestjs/common';
 import { UsersController } from './users.controller';
 import { UserService } from './providers/user.services';
@@ -14,19 +13,22 @@ import { AccessTokenGuard } from 'src/auth/guard/access-token/access-token.guard
 import { APP_GUARD } from '@nestjs/core';
 
 @Module({
-  imports:[
-    TypeOrmModule.forFeature([User]), 
-    forwardRef(()=> AuthModule), 
+  imports: [
+    TypeOrmModule.forFeature([User]),
+    forwardRef(() => AuthModule),
     ConfigModule.forFeature(jwtConfig),
-    JwtModule.registerAsync(jwtConfig.asProvider())
+    JwtModule.registerAsync(jwtConfig.asProvider()),
   ],
   controllers: [UsersController],
-  providers: [UserService, CreateUserProvider, FindOneByEmail,
-    {
-      provide: APP_GUARD,
-      useClass: AccessTokenGuard,
-    }
+  providers: [
+    UserService,
+    CreateUserProvider,
+    FindOneByEmail,
+    // {
+    //   provide: APP_GUARD,
+    //   useClass: AccessTokenGuard,
+    // },
   ],
-  exports: [ TypeOrmModule, UserService],
+  exports: [TypeOrmModule, UserService],
 })
 export class UsersModule {}
