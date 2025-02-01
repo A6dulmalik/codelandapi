@@ -6,6 +6,10 @@ import { UserService } from 'src/users/providers/user.services';
 import { CreatePostDto } from '../dto/createPost.dto';
 import { PatchPostDto } from '../dto/patchPost.dto';
 import { TagService } from 'src/tag/tag.service';
+import { GetPostsDto } from '../dto/getPost.dto';
+import { take } from 'rxjs';
+import { PaginationProvider } from 'src/common/pagination/provider/pagination.provider';
+import { PaginatedInterface } from 'src/common/pagination/interface/paginatedInterface';
 // import { MetaOption } from 'src/meta-options/meta-option.entity';
 
 @Injectable()
@@ -16,14 +20,23 @@ export class PostService {
 
     private readonly userService: UserService,
 
-    private readonly tagService: TagService
-    ,
+    private readonly tagService: TagService,
+
+    private readonly paginationProvider: PaginationProvider,
+
     // @InjectRepository(MetaOption)
     // private metaRepository: Repository<MetaOption>,
   ) {}
 
-  public async findAllPosts(): Promise<Post[]> {
-    return await this.postRepository.find();
+  public async findAllPosts(
+    postQuery: GetPostsDto,
+  ): Promise<PaginatedInterface<Post>> {
+    const post = this.paginationProvider.PaginatedQuery(
+      postQuery,
+      this.postRepository,
+    );
+
+    return post;
   }
 
   public async createPost(createPostDto: CreatePostDto) {

@@ -1,0 +1,10 @@
+POST http://localhost:3002/posts
+Content-Type:application/json
+{
+    "title": "greatest v",
+    "authorId": 3,
+    "postType": "series",
+    "postStatus": "published",
+    "content": "@Password123",
+    "metaOptions": {"metaValue": "{\"sidebar\": true}"}
+}

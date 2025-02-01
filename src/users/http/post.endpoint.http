@@ -1,0 +1,18 @@
+POST http://localhost:3002/users/many-users
+content-Content-Type: application/json
+{
+  "users": [
+    {
+      "firstName": "Yakub",
+      "lastName": "Abdulmalik",
+      "email": "yakubuabdulmalik@gmail.com",
+      "password": "pa$$word"
+    },
+    {
+      "firstName": "Mal",
+      "lastName": "Abba",
+      "email": "malabba@gmail.com",
+      "password": "pa$$word"
+    }
+  ]
+}

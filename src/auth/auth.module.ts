@@ -10,6 +10,8 @@ import jwtConfig from './config/jwt.config';
 import { JwtModule } from '@nestjs/jwt';
 import { GenerateTokensProviderTs } from './providers/generate-tokens.provider.ts';
 import { RefreshTokenProviderTs } from './providers/refresh-token.provider.ts';
+import { AccessTokenGuard } from './guard/access-token/access-token.guard';
+import { AuthTokenGuard } from './guard/authentication/auth-token.guard';
 
 @Module({
   imports: [

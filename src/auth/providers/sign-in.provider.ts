@@ -8,9 +8,6 @@ import {
 import { UserService } from 'src/users/providers/user.services';
 import { SignInDto } from '../dto/signin-auth.dto';
 import { HashingProvider } from './hashing.provider';
-import { JwtService } from '@nestjs/jwt';
-import { ConfigType } from '@nestjs/config';
-import jwtConfig from '../config/jwt.config';
 import { GenerateTokensProviderTs } from './generate-tokens.provider.ts';
 
 @Injectable()
@@ -46,6 +43,9 @@ export class SignInProvider {
       throw new UnauthorizedException('Email/Password incorrect');
     }
 
-    return await this.generateTokenProvider.GenerateTokens(user);
+    //Get generated token
+    const tokens = await this.generateTokenProvider.GenerateTokens(user);
+
+    return [tokens, user];
   }
 }
